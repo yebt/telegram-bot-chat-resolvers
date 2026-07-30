@@ -5,27 +5,27 @@ import type {
   TelegramChat,
   TelegramMessage,
   TelegramUpdate,
-} from './types'
+} from "./types";
 
 interface Occurrence {
-  chat: TelegramChat
-  date: number
-  message?: TelegramMessage
+  chat: TelegramChat;
+  date: number;
+  message?: TelegramMessage;
 }
 
 interface TopicAccumulator extends ResolvedTopic {
   /** Date of the occurrence the current name came from, so newer names win. */
-  nameDate: number
+  nameDate: number;
 }
 
-interface ChatAccumulator extends Omit<ResolvedChat, 'topics'> {
-  topics: Map<string, TopicAccumulator>
+interface ChatAccumulator extends Omit<ResolvedChat, "topics"> {
+  topics: Map<string, TopicAccumulator>;
 }
 
-const GENERAL_TOPIC_KEY = 'general'
+const GENERAL_TOPIC_KEY = "general";
 
 function isDefined<T>(value: T | undefined): value is T {
-  return value !== undefined
+  return value !== undefined;
 }
 
 /** Flattens an update into every (chat, timestamp) pair it carries. */
@@ -36,19 +36,27 @@ function occurrencesOf(update: TelegramUpdate): Occurrence[] {
     update.channel_post,
     update.edited_channel_post,
     update.callback_query?.message,
-  ].filter(isDefined)
+  ].filter(isDefined);
 
-  const memberEvents = [update.my_chat_member, update.chat_member].filter(isDefined)
+  const memberEvents = [update.my_chat_member, update.chat_member].filter(
+    isDefined,
+  );
 
   return [
-    ...messages.map((message) => ({ chat: message.chat, date: message.date, message })),
+    ...messages.map((message) => ({
+      chat: message.chat,
+      date: message.date,
+      message,
+    })),
     ...memberEvents.map((event) => ({ chat: event.chat, date: event.date })),
-  ]
+  ];
 }
 
 function displayTitle(chat: TelegramChat): string {
-  const personalName = [chat.first_name, chat.last_name].filter(Boolean).join(' ')
-  return chat.title ?? (personalName || chat.username || `Chat ${chat.id}`)
+  const personalName = [chat.first_name, chat.last_name]
+    .filter(Boolean)
+    .join(" ");
+  return chat.title ?? (personalName || chat.username || `Chat ${chat.id}`);
 }
 
 /**
@@ -56,8 +64,8 @@ function displayTitle(chat: TelegramChat): string {
  * topic. Its absence means the message lives in the General topic.
  */
 function threadIdOf(message: TelegramMessage): number | null {
-  if (message.chat.is_forum !== true) return null
-  return message.message_thread_id ?? null
+  if (message.chat.is_forum !== true) return null;
+  return message.message_thread_id ?? null;
 }
 
 /** A topic name is never returned by the API on demand — it only leaks through service messages. */
@@ -67,18 +75,18 @@ function topicNameOf(message: TelegramMessage): string | null {
     message.forum_topic_edited?.name ??
     message.reply_to_message?.forum_topic_created?.name ??
     null
-  )
+  );
 }
 
 function upsertTopic(chat: ChatAccumulator, occurrence: Occurrence): void {
-  const { message, date } = occurrence
-  if (!message) return
+  const { message, date } = occurrence;
+  if (!message) return;
 
-  const threadId = threadIdOf(message)
-  const key = threadId === null ? GENERAL_TOPIC_KEY : String(threadId)
-  const name = topicNameOf(message)
+  const threadId = threadIdOf(message);
+  const key = threadId === null ? GENERAL_TOPIC_KEY : String(threadId);
+  const name = topicNameOf(message);
 
-  const existing = chat.topics.get(key)
+  const existing = chat.topics.get(key);
   if (!existing) {
     chat.topics.set(key, {
       threadId,
@@ -86,15 +94,15 @@ function upsertTopic(chat: ChatAccumulator, occurrence: Occurrence): void {
       lastActivity: date,
       updateCount: 1,
       nameDate: name === null ? -1 : date,
-    })
-    return
+    });
+    return;
   }
 
-  existing.updateCount += 1
-  existing.lastActivity = Math.max(existing.lastActivity, date)
+  existing.updateCount += 1;
+  existing.lastActivity = Math.max(existing.lastActivity, date);
   if (name !== null && date >= existing.nameDate) {
-    existing.name = name
-    existing.nameDate = date
+    existing.name = name;
+    existing.nameDate = date;
   }
 }
 
@@ -106,13 +114,13 @@ function upsertTopic(chat: ChatAccumulator, occurrence: Occurrence): void {
  * activity can ever show up here.
  */
 export function resolveChats(updates: TelegramUpdate[]): ResolveSummary {
-  const chats = new Map<number, ChatAccumulator>()
+  const chats = new Map<number, ChatAccumulator>();
 
   for (const update of updates) {
     for (const occurrence of occurrencesOf(update)) {
-      const { chat, date } = occurrence
+      const { chat, date } = occurrence;
 
-      let accumulator = chats.get(chat.id)
+      let accumulator = chats.get(chat.id);
       if (!accumulator) {
         accumulator = {
           id: chat.id,
@@ -123,18 +131,18 @@ export function resolveChats(updates: TelegramUpdate[]): ResolveSummary {
           lastActivity: date,
           updateCount: 0,
           topics: new Map(),
-        }
-        chats.set(chat.id, accumulator)
+        };
+        chats.set(chat.id, accumulator);
       }
 
-      accumulator.updateCount += 1
-      accumulator.lastActivity = Math.max(accumulator.lastActivity, date)
+      accumulator.updateCount += 1;
+      accumulator.lastActivity = Math.max(accumulator.lastActivity, date);
       // Later payloads can carry richer metadata than the first one seen.
-      accumulator.title = chat.title ? displayTitle(chat) : accumulator.title
-      accumulator.username = chat.username ?? accumulator.username
-      accumulator.isForum = accumulator.isForum || chat.is_forum === true
+      accumulator.title = chat.title ? displayTitle(chat) : accumulator.title;
+      accumulator.username = chat.username ?? accumulator.username;
+      accumulator.isForum = accumulator.isForum || chat.is_forum === true;
 
-      upsertTopic(accumulator, occurrence)
+      upsertTopic(accumulator, occurrence);
     }
   }
 
@@ -154,7 +162,7 @@ export function resolveChats(updates: TelegramUpdate[]): ResolveSummary {
             .sort((a, b) => b.lastActivity - a.lastActivity)
         : [],
     }))
-    .sort((a, b) => b.lastActivity - a.lastActivity)
+    .sort((a, b) => b.lastActivity - a.lastActivity);
 
-  return { chats: resolved, updatesScanned: updates.length }
+  return { chats: resolved, updatesScanned: updates.length };
 }

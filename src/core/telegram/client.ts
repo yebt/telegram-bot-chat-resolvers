@@ -1,24 +1,30 @@
-import { TelegramError, fromApiResponse } from './errors'
-import { isLikelyBotToken } from './token'
-import type { ApiResponse, TelegramMessage, TelegramUpdate, TelegramUser, WebhookInfo } from './types'
+import { TelegramError, fromApiResponse } from "./errors";
+import { isLikelyBotToken } from "./token";
+import type {
+  ApiResponse,
+  TelegramMessage,
+  TelegramUpdate,
+  TelegramUser,
+  WebhookInfo,
+} from "./types";
 
-const API_ORIGIN = 'https://api.telegram.org'
+const API_ORIGIN = "https://api.telegram.org";
 
 /** Update types worth scanning to discover chats. */
 const DISCOVERY_UPDATE_TYPES = [
-  'message',
-  'edited_message',
-  'channel_post',
-  'edited_channel_post',
-  'my_chat_member',
-  'chat_member',
-  'callback_query',
-]
+  "message",
+  "edited_message",
+  "channel_post",
+  "edited_channel_post",
+  "my_chat_member",
+  "chat_member",
+  "callback_query",
+];
 
-type RequestParams = Record<string, string | number | boolean | undefined>
+type RequestParams = Record<string, string | number | boolean | undefined>;
 
 export interface RequestOptions {
-  signal?: AbortSignal
+  signal?: AbortSignal;
 }
 
 /**
@@ -36,53 +42,70 @@ async function callApi<T>(
   // (its charset is already path-safe) so anything malformed must be rejected
   // here instead of building a request to an unintended path.
   if (!isLikelyBotToken(token)) {
-    throw new TelegramError('invalid_token', 'The token does not have the shape of a bot token')
+    throw new TelegramError(
+      "invalid_token",
+      "The token does not have the shape of a bot token",
+    );
   }
 
-  const query = new URLSearchParams()
+  const query = new URLSearchParams();
   for (const [key, value] of Object.entries(params)) {
-    if (value !== undefined) query.set(key, String(value))
+    if (value !== undefined) query.set(key, String(value));
   }
 
-  const url = `${API_ORIGIN}/bot${token}/${method}?${query.toString()}`
+  const url = `${API_ORIGIN}/bot${token}/${method}?${query.toString()}`;
 
-  let response: Response
+  let response: Response;
   try {
     response = await fetch(url, {
-      method: 'GET',
-      referrerPolicy: 'no-referrer',
+      method: "GET",
+      referrerPolicy: "no-referrer",
       signal: options.signal,
-    })
+    });
   } catch (cause) {
     if (options.signal?.aborted) {
-      throw new TelegramError('aborted', 'Request aborted', { cause })
+      throw new TelegramError("aborted", "Request aborted", { cause });
     }
-    throw new TelegramError('network', 'Network request to the Telegram API failed', { cause })
+    throw new TelegramError(
+      "network",
+      "Network request to the Telegram API failed",
+      { cause },
+    );
   }
 
-  let payload: ApiResponse<T>
+  let payload: ApiResponse<T>;
   try {
-    payload = (await response.json()) as ApiResponse<T>
+    payload = (await response.json()) as ApiResponse<T>;
   } catch (cause) {
-    throw new TelegramError('malformed_response', 'The Telegram API response was not valid JSON', {
-      errorCode: response.status,
-      cause,
-    })
+    throw new TelegramError(
+      "malformed_response",
+      "The Telegram API response was not valid JSON",
+      {
+        errorCode: response.status,
+        cause,
+      },
+    );
   }
 
   if (!payload.ok || payload.result === undefined) {
-    throw fromApiResponse(payload, response.status)
+    throw fromApiResponse(payload, response.status);
   }
 
-  return payload.result
+  return payload.result;
 }
 
-export function getMe(token: string, options?: RequestOptions): Promise<TelegramUser> {
-  return callApi<TelegramUser>(token, 'getMe', {}, options)
+export function getMe(
+  token: string,
+  options?: RequestOptions,
+): Promise<TelegramUser> {
+  return callApi<TelegramUser>(token, "getMe", {}, options);
 }
 
-export function getWebhookInfo(token: string, options?: RequestOptions): Promise<WebhookInfo> {
-  return callApi<WebhookInfo>(token, 'getWebhookInfo', {}, options)
+export function getWebhookInfo(
+  token: string,
+  options?: RequestOptions,
+): Promise<WebhookInfo> {
+  return callApi<WebhookInfo>(token, "getWebhookInfo", {}, options);
 }
 
 /**
@@ -93,23 +116,26 @@ export function getWebhookInfo(token: string, options?: RequestOptions): Promise
  * events. Without an offset Telegram only replays them, so this app is a
  * read-only observer.
  */
-export function getUpdates(token: string, options?: RequestOptions): Promise<TelegramUpdate[]> {
+export function getUpdates(
+  token: string,
+  options?: RequestOptions,
+): Promise<TelegramUpdate[]> {
   return callApi<TelegramUpdate[]>(
     token,
-    'getUpdates',
+    "getUpdates",
     {
       limit: 100,
       timeout: 0,
       allowed_updates: JSON.stringify(DISCOVERY_UPDATE_TYPES),
     },
     options,
-  )
+  );
 }
 
 export interface SendTestMessageInput {
-  chatId: number
-  threadId: number | null
-  text: string
+  chatId: number;
+  threadId: number | null;
+  text: string;
 }
 
 export function sendTestMessage(
@@ -119,7 +145,7 @@ export function sendTestMessage(
 ): Promise<TelegramMessage> {
   return callApi<TelegramMessage>(
     token,
-    'sendMessage',
+    "sendMessage",
     {
       chat_id: chatId,
       message_thread_id: threadId ?? undefined,
@@ -127,5 +153,5 @@ export function sendTestMessage(
       disable_notification: false,
     },
     options,
-  )
+  );
 }

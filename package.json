@@ -14,7 +14,7 @@
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "format:oxfmt": "oxfmt src/",
-    "format": "prettier ."
+    "format": "prettier --write ."
   },
   "dependencies": {
     "astro": "^7.1.6"

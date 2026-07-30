@@ -3,20 +3,25 @@
 // browser, so the bot token never crosses a server boundary.
 ---
 
-<div class="relative z-10 mx-auto max-w-5xl px-4 py-10 font-body">
+<div class="font-body relative z-10 mx-auto max-w-5xl px-4 py-10">
   <header class="text-center">
-    <h1 class="font-display text-4xl leading-tight sm:text-6xl">Telegram Resolver</h1>
+    <h1 class="font-display text-4xl leading-tight sm:text-6xl">
+      Telegram Resolver
+    </h1>
     <div class="rule mx-auto mt-3 max-w-md"></div>
     <p class="mx-auto mt-3 max-w-xl text-base sm:text-lg">
-      Reads a bot's recent events to reveal the groups and topics it can reach, along with the ids
-      you need to notify them.
+      Reads a bot's recent events to reveal the groups and topics it can reach,
+      along with the ids you need to notify them.
     </p>
   </header>
 
   <section class="plate mt-10">
     <h2 class="plate__title">The Token</h2>
     <form id="resolve-form" class="p-4 sm:p-5" novalidate>
-      <label for="token-input" class="font-mono text-xs tracking-widest uppercase">Bot token</label>
+      <label
+        for="token-input"
+        class="font-mono text-xs tracking-widest uppercase">Bot token</label
+      >
       <div class="mt-2 flex flex-col gap-2 sm:flex-row">
         <input
           id="token-input"
@@ -31,27 +36,41 @@
           placeholder="123456789:AAE..."
           aria-describedby="token-hint"
         />
-        <button type="button" id="toggle-token" class="stamp stamp--small" aria-pressed="false">
+        <button
+          type="button"
+          id="toggle-token"
+          class="stamp stamp--small"
+          aria-pressed="false"
+        >
           Reveal
         </button>
         <button type="submit" id="resolve-button" class="stamp">Resolve</button>
       </div>
       <p id="token-hint" class="mt-3 text-sm leading-snug">
-        The token stays in this tab's memory: it is never stored, never logged and never sent
-        anywhere except <span class="font-mono text-xs">api.telegram.org</span>. Reload the page and
-        it is gone.
+        The token stays in this tab's memory: it is never stored, never logged
+        and never sent anywhere except <span class="font-mono text-xs"
+          >api.telegram.org</span
+        >. Reload the page and it is gone.
       </p>
     </form>
   </section>
 
-  <div id="feedback" class="mt-6 flex flex-col gap-3" role="status" aria-live="polite"></div>
+  <div
+    id="feedback"
+    class="mt-6 flex flex-col gap-3"
+    role="status"
+    aria-live="polite"
+  >
+  </div>
 
   <section id="bot-plate" class="plate plate--void mt-6" hidden>
     <h2 class="plate__title">The Bearer</h2>
     <div id="bot-body" class="p-4 sm:p-5"></div>
   </section>
 
-  <div class="mt-6 grid grid-cols-1 items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
+  <div
+    class="mt-6 grid grid-cols-1 items-start gap-6 lg:grid-cols-[1.15fr_1fr]"
+  >
     <section id="chats-plate" class="plate" hidden>
       <h2 class="plate__title">Discovered Chats</h2>
       <div class="p-4 sm:p-5">
@@ -60,20 +79,24 @@
       </div>
     </section>
 
-    <aside id="target-plate" class="plate plate--void lg:sticky lg:top-6" hidden>
+    <aside
+      id="target-plate"
+      class="plate plate--void lg:sticky lg:top-6"
+      hidden
+    >
       <h2 class="plate__title">Selected Target</h2>
       <div id="target-body" class="p-4 sm:p-5"></div>
     </aside>
   </div>
 
-  <footer class="mt-12 text-center text-xs font-mono tracking-wide">
+  <footer class="mt-12 text-center font-mono text-xs tracking-wide">
     <div class="rule mx-auto mb-3 max-w-xs"></div>
     <p>Discovery is limited to the last 24 hours of the bot's update queue.</p>
   </footer>
 </div>
 
 <script>
-  import { mountResolver } from './resolver-app.client'
+  import { mountResolver } from "./resolver-app.client";
 
-  mountResolver()
+  mountResolver();
 </script>

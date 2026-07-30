@@ -1,6 +1,6 @@
-import { globalIgnores } from 'eslint/config'
-import pluginOxlint from 'eslint-plugin-oxlint'
-import eslintPluginAstro from "eslint-plugin-astro"
+import { globalIgnores } from "eslint/config";
+import pluginOxlint from "eslint-plugin-oxlint";
+import eslintPluginAstro from "eslint-plugin-astro";
 
 export default [
   // add more generic rule sets here, such as:
@@ -13,8 +13,7 @@ export default [
     },
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  globalIgnores(["**/dist/**", "**/dist-ssr/**", "**/coverage/**"]),
 
-  ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
-
-]
+  ...pluginOxlint.buildFromOxlintConfigFile(".oxlintrc.json"),
+];

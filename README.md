@@ -11,13 +11,13 @@ Fully static. The token never leaves your browser.
 ## How it works
 
 1. **`getMe`** confirms the token and reports the bot's identity and capabilities.
-2. **`getWebhookInfo`** runs *before* anything else, because a registered webhook makes the next
+2. **`getWebhookInfo`** runs _before_ anything else, because a registered webhook makes the next
    step impossible.
 3. **`getUpdates`** reads the pending queue and the app derives the chat/topic tree from it.
 4. **`sendMessage`** delivers a test notification to the selected chat, in the selected topic.
 
 Every call goes straight from your browser to `api.telegram.org` as a `GET` request — a CORS
-*simple request*, so no preflight is needed and no server sits in the middle.
+_simple request_, so no preflight is needed and no server sits in the middle.
 
 ## What it cannot do
 
@@ -28,7 +28,7 @@ which means:
 - **Only the last 24 hours.** Telegram drops older updates. A group with no recent activity cannot
   appear, and that is not a bug in this app.
 - **A webhook blocks everything.** While a webhook is registered, `getUpdates` answers `409
-  Conflict`. The app detects this up front and tells you which URL is registered — it will **not**
+Conflict`. The app detects this up front and tells you which URL is registered — it will **not**
   delete the webhook for you, because that would break whatever depends on it.
 - **Privacy mode hides most messages.** With privacy mode on, a bot only receives commands and
   replies addressed to it. The app reads `can_read_all_group_messages` and warns you when this is
@@ -72,14 +72,14 @@ The `core` layer knows nothing about the DOM, so the resolution logic can be exe
 
 ## Commands
 
-| Command             | Action                                       |
-| :------------------ | :------------------------------------------- |
-| `bun install`       | Install dependencies                          |
-| `bun run dev`       | Dev server at `localhost:4321`                |
-| `bun run build`     | Build the static site to `./dist/`            |
-| `bun run preview`   | Preview the production build                  |
-| `bun run lint`      | oxlint + eslint, with fixes                   |
-| `bun run format`    | Prettier                                      |
+| Command           | Action                             |
+| :---------------- | :--------------------------------- |
+| `bun install`     | Install dependencies               |
+| `bun run dev`     | Dev server at `localhost:4321`     |
+| `bun run build`   | Build the static site to `./dist/` |
+| `bun run preview` | Preview the production build       |
+| `bun run lint`    | oxlint + eslint, with fixes        |
+| `bun run format`  | Prettier                           |
 
 Requires Node >= 22.12.
 

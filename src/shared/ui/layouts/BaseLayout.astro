@@ -1,10 +1,10 @@
 ---
 interface Props {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
-const { title, description } = Astro.props
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -51,17 +51,26 @@ const { title, description } = Astro.props
     position: relative;
     min-height: 100vh;
     background-color: var(--paper);
-    background-image: radial-gradient(circle at 50% 0%, var(--panel) 0%, var(--paper) 45%, var(--paper-deep) 100%);
+    background-image: radial-gradient(
+      circle at 50% 0%,
+      var(--panel) 0%,
+      var(--paper) 45%,
+      var(--paper-deep) 100%
+    );
   }
 
   /* Halftone screen: the whole page reads as a printed, dithered plate. */
   body::after {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
     z-index: 40;
     pointer-events: none;
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0.6px, transparent 0.7px);
+    background-image: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.5) 0.6px,
+      transparent 0.7px
+    );
     background-size: 3px 3px;
     opacity: 0.4;
     mix-blend-mode: multiply;
@@ -69,7 +78,7 @@ const { title, description } = Astro.props
 
   /* Paper grain. */
   body::before {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
     z-index: 39;
@@ -241,13 +250,13 @@ const { title, description } = Astro.props
     background-color: var(--chalk);
   }
 
-  .entry[aria-pressed='true'] {
+  .entry[aria-pressed="true"] {
     background-color: var(--void);
     color: var(--chalk);
     box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.12);
   }
 
-  .entry[aria-pressed='true'] .entry__meta {
+  .entry[aria-pressed="true"] .entry__meta {
     color: var(--chalk-soft);
   }
 
