@@ -261,6 +261,9 @@ const { title, description } = Astro.props
     border: 2px solid var(--edge);
     padding: 0.7rem 0.9rem;
     background-color: var(--panel);
+    /* Notices are also rendered inside dark plates, so the text colour is
+       always stated here — never inherited from whatever contains them. */
+    color: var(--ink);
     box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   }
 
@@ -272,17 +275,27 @@ const { title, description } = Astro.props
 
   .notice--warn {
     background-color: var(--panel-sunken);
+    /* Warning tape on the left edge only: the stripes must draw the eye
+       without ever running behind the text they are announcing. */
     background-image: repeating-linear-gradient(
       45deg,
-      rgba(0, 0, 0, 0.16) 0,
-      rgba(0, 0, 0, 0.16) 6px,
-      transparent 6px,
-      transparent 12px
+      rgba(0, 0, 0, 0.55) 0,
+      rgba(0, 0, 0, 0.55) 4px,
+      transparent 4px,
+      transparent 9px
     );
+    background-repeat: no-repeat;
+    background-size: 14px 100%;
+    padding-left: 1.7rem;
   }
 
   .notice--success {
     background-color: var(--chalk);
+  }
+
+  /* Metadata sits on light panels by default; on a dark plate it must flip. */
+  .plate--void .entry__meta {
+    color: var(--chalk-soft);
   }
 
   .notice__title {

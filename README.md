@@ -1,10 +1,8 @@
-# Astro Starter Kit: Minimal
+# Telegram Resolver
 
-```sh
-bun create astro@latest -- --template minimal
-```
+![A gothic bestiary manual entry plate illustrating the Telegram Resolver. It shows a simulated Telegram bot token box on the left, next to serif-font prose describing how the bot token reveals group and topic numbers, and a near-black console output on the right displaying resolved group, general, and deploy thread details.](public/banner.png)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+A static web app to paste a Telegram bot token, read its recent update queue, and list every group, supergroup, channel, and forum topic it has seen. Exposes the `chat_id` and `message_thread_id` so you can fire test notifications without the token leaving your browser. Designed for bot and backend developers.
 
 ## 🚀 Project Structure
 

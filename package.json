@@ -20,8 +20,12 @@
     "astro": "^7.1.6"
   },
   "devDependencies": {
+    "@compai/font-unifraktur-maguntia": "^0.0.3",
+    "@fontsource/eb-garamond": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@types/node": "^26.1.2",
     "@typescript-eslint/parser": "^8.65.0",
+    "@typopro/web-unifraktur": "^3.7.5",
     "@unocss/astro": "^66.7.5",
     "@unocss/preset-icons": "^66.7.5",
     "@unocss/preset-web-fonts": "^66.7.5",
@@ -34,6 +38,7 @@
     "eslint-plugin-oxlint": "^1.76.0",
     "jiti": "^2.7.0",
     "npm-run-all2": "^9.0.3",
+    "opentype.js": "^2.0.0",
     "oxfmt": "^0.61.0",
     "oxlint": "^1.76.0",
     "prettier": "^3.9.6",
