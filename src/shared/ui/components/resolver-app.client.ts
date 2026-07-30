@@ -60,7 +60,7 @@ function topicLabel(topic: ResolvedTopic): string {
 
 function buildNotice(tone: NoticeTone, presentation: ErrorPresentation): HTMLElement {
   const notice = element('div', `notice notice--${tone}`)
-  notice.append(element('p', 'notice__title font-display', presentation.title))
+  notice.append(element('p', 'notice__title', presentation.title))
   notice.append(element('p', 'notice__detail mt-1', presentation.detail))
   if (presentation.hint) {
     notice.append(element('p', 'notice__hint mt-2', presentation.hint))
@@ -132,7 +132,7 @@ export function mountResolver(): void {
 
     const header = element('div', 'flex flex-wrap items-start justify-between gap-3')
     const identity = element('div', 'min-w-0')
-    identity.append(element('p', 'font-display text-3xl leading-tight', profile.displayName))
+    identity.append(element('p', 'text-3xl font-semibold leading-tight', profile.displayName))
     identity.append(element('p', 'entry__meta mt-1', profile.handle ?? 'no public username'))
     header.append(identity)
 
@@ -160,7 +160,7 @@ export function mountResolver(): void {
     // Privacy mode is the single most common reason a group never shows up.
     if (profile.privacyMode === true) {
       const warning = element('div', 'notice notice--warn mt-4')
-      warning.append(element('p', 'notice__title font-display', 'Privacy mode is enabled'))
+      warning.append(element('p', 'notice__title', 'Privacy mode is enabled'))
       warning.append(
         element(
           'p',
@@ -191,7 +191,7 @@ export function mountResolver(): void {
 
     const { chat, topic } = state.selection
 
-    const title = element('p', 'font-display text-2xl', chat.title)
+    const title = element('p', 'text-2xl font-semibold leading-tight', chat.title)
     const subtitle = element(
       'p',
       'entry__meta mt-1',
@@ -289,7 +289,7 @@ export function mountResolver(): void {
     const selected = state.selection?.chat.id === chat.id && state.selection.topic === null
     button.setAttribute('aria-pressed', String(selected))
 
-    const heading = element('p', 'font-display text-xl leading-tight', chat.title)
+    const heading = element('p', 'text-lg font-semibold leading-tight', chat.title)
     const meta = element(
       'p',
       'entry__meta mt-1',

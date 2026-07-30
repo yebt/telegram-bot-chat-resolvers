@@ -125,12 +125,14 @@ const { title, description } = Astro.props
   }
 
   .plate__title {
-    font-family: var(--font-display, serif);
-    font-size: 1.6rem;
-    line-height: 1.3;
-    letter-spacing: 0.02em;
+    font-family: var(--font-body, serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     border-bottom: 2px solid var(--edge);
-    padding: 0.35rem 0.9rem;
+    padding: 0.5rem 0.9rem;
     background-color: var(--panel-sunken);
   }
 
@@ -167,9 +169,11 @@ const { title, description } = Astro.props
   }
 
   .stamp {
-    font-family: var(--font-display, serif);
-    font-size: 1.05rem;
-    letter-spacing: 0.03em;
+    font-family: var(--font-body, serif);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     background-color: var(--panel);
     color: var(--ink);
     border: 2px solid var(--edge);
@@ -299,8 +303,10 @@ const { title, description } = Astro.props
   }
 
   .notice__title {
-    font-family: var(--font-display, serif);
-    font-size: 1.15rem;
+    font-family: var(--font-body, serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
   }
 
   .notice__detail {

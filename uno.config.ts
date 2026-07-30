@@ -18,9 +18,11 @@ export default defineConfig({
     presetWebFonts({
       provider: "fontsource",
       fonts: {
+        // Blackletter is reserved for the page title alone: it carries the
+        // character, but it is unreadable at UI sizes.
         display: 'UnifrakturMaguntia',
-        body: 'EB Garamond',
-        mono: 'JetBrains Mono',
+        body: [{ name: 'IBM Plex Serif', weights: [400, 600, 700] }],
+        mono: [{ name: 'JetBrains Mono', weights: [400, 700] }],
       },
     }),
   ],
