@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <title>teelgram-resolver - Open Graph Image</title>
+  <desc>Open Graph sharing preview image for teelgram-resolver.</desc>
+  <defs>
+    <style>
+      .font-sans {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+      .font-mono {
+        font-family: "JetBrains Mono", "Fira Code", "Courier New", Courier, monospace;
+      }
+    </style>
+    <linearGradient id="flow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569" stop-opacity="0.2" />
+      <stop offset="50%" stop-color="#2AABEE" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="1" />
+    </linearGradient>
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2AABEE" />
+      <stop offset="100%" stop-color="#229ED9" />
+    </linearGradient>
+    <radialGradient id="bg-grad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#334155" stroke-width="1.5" stroke-opacity="0.3" />
+    </pattern>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-grad)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+
+  <!-- Flow curve -->
+  <path d="M 520 375 C 600 375, 570 310, 630 310" fill="none" stroke="url(#flow-grad)" stroke-width="3" stroke-dasharray="6,4" />
+  <circle cx="575" cy="342" r="5" fill="#38BDF8" />
+  <circle cx="575" cy="342" r="10" fill="none" stroke="#38BDF8" stroke-width="1" opacity="0.5" />
+
+  <!-- Logo and Wordmark Group -->
+  <g transform="translate(80, 110)">
+    <rect width="56" height="56" rx="14" fill="url(#logo-grad)" />
+    <line x1="18" y1="37" x2="28" y2="19" stroke="#FFFFFF" stroke-width="2.5" />
+    <line x1="38" y1="37" x2="28" y2="19" stroke="#FFFFFF" stroke-width="2.5" />
+    <circle cx="28" cy="19" r="5" fill="#FFFFFF" />
+    <circle cx="18" cy="37" r="4" fill="#FFFFFF" />
+    <circle cx="38" cy="37" r="4" fill="#FFFFFF" />
+
+    <text x="76" y="40" class="font-sans" font-size="40" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">teelgram<tspan fill="#38BDF8">-</tspan>resolver</text>
+  </g>
+
+  <!-- Tagline -->
+  <text x="80" y="200" class="font-sans" font-size="18" font-weight="500" fill="#94A3B8">Resolve group and topic IDs from a bot token.</text>
+
+  <!-- TOKEN INPUT CONTAINER -->
+  <g transform="translate(80, 250)" filter="url(#shadow)">
+    <rect width="440" height="80" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    <text x="24" y="28" class="font-sans" font-size="11" font-weight="700" fill="#94A3B8" letter-spacing="1">TELEGRAM BOT TOKEN</text>
+    <text x="24" y="55" class="font-mono" font-size="18" font-weight="700" fill="#38BDF8">8123456789:AAH<tspan fill="#475569">•••••••••</tspan></text>
+  </g>
+
+  <!-- OUTPUT WINDOW CONTAINER -->
+  <g transform="translate(630, 140)" filter="url(#shadow)">
+    <rect width="490" height="340" rx="16" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    
+    <!-- Window controls -->
+    <circle cx="28" cy="28" r="5" fill="#EF4444" />
+    <circle cx="44" cy="28" r="5" fill="#F59E0B" />
+    <circle cx="60" cy="28" r="5" fill="#10B981" />
+    
+    <text x="80" y="32" class="font-sans" font-size="11" font-weight="700" fill="#94A3B8" letter-spacing="1.5">RESOLVED OUTBOX</text>
+    
+    <!-- Live Badge -->
+    <rect x="380" y="19" width="90" height="18" rx="4" fill="#064E3B" stroke="#047857" stroke-width="1" />
+    <circle cx="394" cy="28" r="3.5" fill="#34D399" />
+    <text x="404" y="32" class="font-sans" font-size="10" font-weight="700" fill="#34D399" letter-spacing="0.5">UPDATES</text>
+
+    <!-- Content List -->
+    <!-- Chat 1: Group -->
+    <g transform="translate(28, 80)">
+      <path d="M 8 12 C 9.66 12 11 10.66 11 9 C 11 7.34 9.66 6 8 6 C 6.34 6 5 7.34 5 9 C 5 10.66 6.34 12 8 12 Z M 8 14 C 5.33 14 0 15.33 0 18 L 0 20 L 16 20 L 16 18 C 16 15.33 10.67 14 8 14 Z" fill="#2AABEE" transform="scale(1)" />
+      <text x="26" y="15" class="font-sans" font-size="16" font-weight="700" fill="#F8FAFC">Team Chat</text>
+      <text x="434" y="15" class="font-mono" font-size="15" font-weight="700" fill="#94A3B8" text-anchor="end">-1001234567890</text>
+    </g>
+
+    <!-- Branch Lines -->
+    <path d="M 42 110 V 190 M 42 145 H 62 M 42 190 H 62" stroke="#475569" stroke-width="1.5" stroke-dasharray="2,2" />
+
+    <!-- Topic 1.1 -->
+    <g transform="translate(68, 134)">
+      <path d="M 0 4 H 8 V 12 H 0 Z M 2 1 H 6 M 4 12 V 14" stroke="#38BDF8" stroke-width="1.5" fill="none" />
+      <text x="20" y="12" class="font-sans" font-size="15" font-weight="500" fill="#E2E8F0">General</text>
+      <text x="394" y="12" class="font-mono" font-size="14" font-weight="700" fill="#38BDF8" text-anchor="end">thread 1</text>
+    </g>
+
+    <!-- Topic 1.2 -->
+    <g transform="translate(68, 178)">
+      <path d="M 0 4 H 8 V 12 H 0 Z M 2 1 H 6 M 4 12 V 14" stroke="#38BDF8" stroke-width="1.5" fill="none" />
+      <text x="20" y="12" class="font-sans" font-size="15" font-weight="500" fill="#E2E8F0">Deploys</text>
+      <text x="394" y="12" class="font-mono" font-size="14" font-weight="700" fill="#38BDF8" text-anchor="end">thread 42</text>
+    </g>
+
+    <!-- Chat 2: Channel -->
+    <g transform="translate(28, 240)">
+      <path d="M 17.5 2.5 L 17.5 12.5 M 1.5 5.5 L 6.5 5.5 L 12.5 1.5 L 12.5 13.5 L 6.5 9.5 L 1.5 9.5 Z" stroke="#2AABEE" stroke-width="1.5" fill="none" stroke-linejoin="round" transform="scale(1)" />
+      <text x="26" y="13" class="font-sans" font-size="16" font-weight="700" fill="#F8FAFC">Alert Channel</text>
+      <text x="434" y="13" class="font-mono" font-size="15" font-weight="700" fill="#94A3B8" text-anchor="end">-1009876543210</text>
+    </g>
+  </g>
+</svg>

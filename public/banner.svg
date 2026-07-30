@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400">
+  <title>teelgram-resolver - Light Banner</title>
+  <desc>Visual explanation of teelgram-resolver resolving a Telegram bot token into chat and topic IDs.</desc>
+  <defs>
+    <style>
+      .font-sans {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+      .font-mono {
+        font-family: "JetBrains Mono", "Fira Code", "Courier New", Courier, monospace;
+      }
+    </style>
+    <linearGradient id="flow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.2" />
+      <stop offset="50%" stop-color="#2AABEE" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#229ED9" stop-opacity="1" />
+    </linearGradient>
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2AABEE" />
+      <stop offset="100%" stop-color="#229ED9" />
+    </linearGradient>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8FAFC" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E2E8F0" stroke-width="1.5" stroke-opacity="0.4" />
+    </pattern>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="400" fill="url(#bg-grad)" />
+  <rect width="1280" height="400" fill="url(#grid)" />
+
+  <!-- Flow curve connecting token to output -->
+  <path d="M 544 236 C 630 236, 630 200, 720 200" fill="none" stroke="url(#flow-grad)" stroke-width="3" stroke-dasharray="6,4" />
+  <circle cx="628" cy="219" r="5" fill="#229ED9" />
+  <circle cx="628" cy="219" r="10" fill="none" stroke="#229ED9" stroke-width="1" opacity="0.5" />
+
+  <!-- Logo and Wordmark Group -->
+  <g transform="translate(64, 64)">
+    <!-- Custom Logo (Network Node representing resolution) -->
+    <rect width="48" height="48" rx="12" fill="url(#logo-grad)" />
+    <!-- Node connections inside logo -->
+    <line x1="16" y1="32" x2="24" y2="16" stroke="#FFFFFF" stroke-width="2" />
+    <line x1="32" y1="32" x2="24" y2="16" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="24" cy="16" r="4.5" fill="#FFFFFF" />
+    <circle cx="16" cy="32" r="3.5" fill="#FFFFFF" />
+    <circle cx="32" cy="32" r="3.5" fill="#FFFFFF" />
+
+    <!-- Wordmark -->
+    <text x="64" y="34" class="font-sans" font-size="34" font-weight="800" fill="#0F172A" letter-spacing="-0.5">teelgram<tspan fill="#229ED9">-</tspan>resolver</text>
+  </g>
+
+  <!-- Tagline -->
+  <text x="64" y="152" class="font-sans" font-size="16" font-weight="500" fill="#475569">Resolve group and topic IDs from a bot token.</text>
+
+  <!-- TOKEN INPUT CONTAINER -->
+  <g filter="url(#shadow)">
+    <rect x="64" y="200" width="480" height="72" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="84" y="222" class="font-sans" font-size="11" font-weight="700" fill="#64748B" letter-spacing="1">TELEGRAM BOT TOKEN</text>
+    <text x="84" y="249" class="font-mono" font-size="18" font-weight="700" fill="#0F172A">8123456789:AAH<tspan fill="#94A3B8">•••••••••</tspan></text>
+    
+    <!-- Shield / Private Icon -->
+    <g transform="translate(492, 24)" opacity="0.6">
+      <path d="M 12 22 C 12 22 20 18 20 12 L 20 5 L 12 2 L 4 5 L 4 12 C 4 18 12 22 12 22 Z" fill="none" stroke="#64748B" stroke-width="2" stroke-linejoin="round" />
+    </g>
+  </g>
+
+  <!-- OUTPUT WINDOW CONTAINER -->
+  <g filter="url(#shadow)">
+    <rect x="720" y="80" width="496" height="240" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    
+    <!-- Window controls -->
+    <circle cx="748" cy="108" r="5" fill="#EF4444" />
+    <circle cx="764" cy="108" r="5" fill="#F59E0B" />
+    <circle cx="780" cy="108" r="5" fill="#10B981" />
+    
+    <text x="800" y="112" class="font-sans" font-size="11" font-weight="700" fill="#64748B" letter-spacing="1.5">RESOLVED OUTBOX</text>
+    
+    <!-- Live Badge -->
+    <rect x="1106" y="99" width="90" height="18" rx="4" fill="#F0FDF4" stroke="#DCFCE7" stroke-width="1" />
+    <circle cx="1120" cy="108" r="3.5" fill="#22C55E" />
+    <text x="1130" y="112" class="font-sans" font-size="10" font-weight="700" fill="#15803D" letter-spacing="0.5">UPDATES</text>
+
+    <!-- Content List -->
+    <!-- Chat 1: Group -->
+    <g transform="translate(748, 148)">
+      <path d="M 8 12 C 9.66 12 11 10.66 11 9 C 11 7.34 9.66 6 8 6 C 6.34 6 5 7.34 5 9 C 5 10.66 6.34 12 8 12 Z M 8 14 C 5.33 14 0 15.33 0 18 L 0 20 L 16 20 L 16 18 C 16 15.33 10.67 14 8 14 Z" fill="#229ED9" transform="scale(0.9)" />
+      <text x="22" y="14" class="font-sans" font-size="15" font-weight="700" fill="#0F172A">Team Chat</text>
+      <text x="448" y="14" class="font-mono" font-size="14" font-weight="700" fill="#475569" text-anchor="end">-1001234567890</text>
+    </g>
+
+    <!-- Branch Lines -->
+    <path d="M 762 172 V 226 M 762 198 H 778 M 762 226 H 778" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="2,2" />
+
+    <!-- Topic 1.1 -->
+    <g transform="translate(784, 192)">
+      <path d="M 0 4 H 8 V 12 H 0 Z M 2 1 H 6 M 4 12 V 14" stroke="#0284C7" stroke-width="1.5" fill="none" />
+      <text x="18" y="12" class="font-sans" font-size="14" font-weight="500" fill="#334155">General</text>
+      <text x="412" y="12" class="font-mono" font-size="13" font-weight="700" fill="#0284C7" text-anchor="end">thread 1</text>
+    </g>
+
+    <!-- Topic 1.2 -->
+    <g transform="translate(784, 220)">
+      <path d="M 0 4 H 8 V 12 H 0 Z M 2 1 H 6 M 4 12 V 14" stroke="#0284C7" stroke-width="1.5" fill="none" />
+      <text x="18" y="12" class="font-sans" font-size="14" font-weight="500" fill="#334155">Deploys</text>
+      <text x="412" y="12" class="font-mono" font-size="13" font-weight="700" fill="#0284C7" text-anchor="end">thread 42</text>
+    </g>
+
+    <!-- Chat 2: Channel -->
+    <g transform="translate(748, 264)">
+      <path d="M 17.5 2.5 L 17.5 12.5 M 1.5 5.5 L 6.5 5.5 L 12.5 1.5 L 12.5 13.5 L 6.5 9.5 L 1.5 9.5 Z" stroke="#229ED9" stroke-width="1.5" fill="none" stroke-linejoin="round" />
+      <text x="22" y="12" class="font-sans" font-size="15" font-weight="700" fill="#0F172A">Alert Channel</text>
+      <text x="448" y="12" class="font-mono" font-size="14" font-weight="700" fill="#475569" text-anchor="end">-1009876543210</text>
+    </g>
+  </g>
+</svg>
