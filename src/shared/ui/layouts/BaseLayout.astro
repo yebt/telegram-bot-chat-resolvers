@@ -1,0 +1,348 @@
+---
+interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+  </head>
+  <body class="font-body">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --paper: #b4b4b4;
+    --paper-deep: #9d9d9d;
+    --panel: #c3c3c3;
+    --panel-sunken: #adadad;
+    --void: #0c0c0c;
+    --void-soft: #1c1c1c;
+    --ink: #141414;
+    --ink-soft: #3a3a3a;
+    --ink-faint: #565656;
+    --chalk: #d8d8d8;
+    --chalk-soft: #a5a5a5;
+    --edge: #4b4b4b;
+    --bevel-light: #e4e4e4;
+    --bevel-dark: #6e6e6e;
+  }
+
+  html {
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
+  body {
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--paper);
+    background-image: radial-gradient(circle at 50% 0%, var(--panel) 0%, var(--paper) 45%, var(--paper-deep) 100%);
+  }
+
+  /* Halftone screen: the whole page reads as a printed, dithered plate. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0.6px, transparent 0.7px);
+    background-size: 3px 3px;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+  }
+
+  /* Paper grain. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  ::selection {
+    background: var(--void);
+    color: var(--chalk);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--void);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Plate: the beveled frame every block of the page sits inside.
+   * ---------------------------------------------------------------- */
+  .plate {
+    position: relative;
+    background-color: var(--panel);
+    border: 2px solid var(--edge);
+    box-shadow:
+      inset 1px 1px 0 var(--bevel-light),
+      inset -1px -1px 0 var(--bevel-dark),
+      4px 4px 0 rgba(0, 0, 0, 0.32);
+  }
+
+  .plate--void {
+    background-color: var(--void);
+    color: var(--chalk);
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 0.14),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.9),
+      4px 4px 0 rgba(0, 0, 0, 0.45);
+  }
+
+  .plate__title {
+    font-family: var(--font-display, serif);
+    font-size: 1.6rem;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    border-bottom: 2px solid var(--edge);
+    padding: 0.35rem 0.9rem;
+    background-color: var(--panel-sunken);
+  }
+
+  .plate--void .plate__title {
+    background-color: var(--void-soft);
+    border-bottom-color: #444;
+    color: var(--chalk);
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Controls
+   * ---------------------------------------------------------------- */
+  .field {
+    width: 100%;
+    background-color: var(--chalk);
+    border: 2px solid var(--edge);
+    box-shadow:
+      inset 2px 2px 0 var(--bevel-dark),
+      inset -1px -1px 0 var(--bevel-light);
+    padding: 0.5rem 0.7rem;
+    color: var(--ink);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9rem;
+  }
+
+  .field::placeholder {
+    color: var(--ink-faint);
+  }
+
+  .field:disabled {
+    background-color: var(--panel-sunken);
+    color: var(--ink-faint);
+    cursor: not-allowed;
+  }
+
+  .stamp {
+    font-family: var(--font-display, serif);
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+    background-color: var(--panel);
+    color: var(--ink);
+    border: 2px solid var(--edge);
+    box-shadow:
+      inset 1px 1px 0 var(--bevel-light),
+      inset -1px -1px 0 var(--bevel-dark),
+      2px 2px 0 rgba(0, 0, 0, 0.35);
+    padding: 0.35rem 1rem;
+    cursor: pointer;
+    transition: transform 80ms linear;
+  }
+
+  .stamp:hover:not(:disabled) {
+    background-color: var(--chalk);
+  }
+
+  .stamp:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow:
+      inset 2px 2px 0 var(--bevel-dark),
+      inset -1px -1px 0 var(--bevel-light);
+  }
+
+  .stamp:disabled {
+    color: var(--ink-faint);
+    cursor: progress;
+    box-shadow: inset 2px 2px 0 var(--bevel-dark);
+  }
+
+  .stamp--void {
+    background-color: var(--void);
+    color: var(--chalk);
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 0.16),
+      inset -1px -1px 0 #000,
+      2px 2px 0 rgba(0, 0, 0, 0.45);
+  }
+
+  .stamp--void:hover:not(:disabled) {
+    background-color: var(--void-soft);
+  }
+
+  .stamp--small {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Entries: the discovered chats and their topics.
+   * ---------------------------------------------------------------- */
+  .entry {
+    width: 100%;
+    text-align: left;
+    background-color: var(--panel-sunken);
+    border: 2px solid var(--edge);
+    box-shadow: inset 1px 1px 0 var(--bevel-light);
+    padding: 0.55rem 0.75rem;
+    cursor: pointer;
+  }
+
+  .entry:hover {
+    background-color: var(--chalk);
+  }
+
+  .entry[aria-pressed='true'] {
+    background-color: var(--void);
+    color: var(--chalk);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .entry[aria-pressed='true'] .entry__meta {
+    color: var(--chalk-soft);
+  }
+
+  .entry__meta {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Notices
+   * ---------------------------------------------------------------- */
+  .notice {
+    border: 2px solid var(--edge);
+    padding: 0.7rem 0.9rem;
+    background-color: var(--panel);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .notice--error {
+    background-color: var(--void);
+    color: var(--chalk);
+    border-color: #000;
+  }
+
+  .notice--warn {
+    background-color: var(--panel-sunken);
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.16) 0,
+      rgba(0, 0, 0, 0.16) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+  }
+
+  .notice--success {
+    background-color: var(--chalk);
+  }
+
+  .notice__title {
+    font-family: var(--font-display, serif);
+    font-size: 1.15rem;
+  }
+
+  .notice__detail {
+    font-size: 0.95rem;
+  }
+
+  .notice__hint {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  .rule {
+    height: 2px;
+    background-color: var(--edge);
+    box-shadow: 0 1px 0 var(--bevel-light);
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Capability chips — filled square = granted, hollow = denied.
+   * ---------------------------------------------------------------- */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    padding: 0.2rem 0.55rem;
+  }
+
+  .chip__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid currentColor;
+    flex: none;
+  }
+
+  .chip--on .chip__dot {
+    background-color: currentColor;
+  }
+
+  .chip--off {
+    opacity: 0.75;
+  }
+
+  .chip--unknown {
+    opacity: 0.45;
+    border-style: dashed;
+  }
+
+  .chip--unknown .chip__dot {
+    border-style: dashed;
+  }
+</style>
