@@ -22,6 +22,13 @@
   "devDependencies": {
     "@types/node": "^26.1.2",
     "@typescript-eslint/parser": "^8.65.0",
+    "@unocss/astro": "^66.7.5",
+    "@unocss/preset-icons": "^66.7.5",
+    "@unocss/preset-web-fonts": "^66.7.5",
+    "@unocss/preset-wind4": "^66.7.5",
+    "@unocss/reset": "^66.7.5",
+    "@unocss/transformer-directives": "^66.7.5",
+    "@unocss/transformer-variant-group": "^66.7.5",
     "eslint": "^10.8.0",
     "eslint-plugin-astro": "^3.0.1",
     "eslint-plugin-oxlint": "^1.76.0",
@@ -31,6 +38,7 @@
     "oxlint": "^1.76.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.8.1"
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "unocss": "^66.7.5"
   }
 }
